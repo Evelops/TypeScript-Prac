@@ -1,11 +1,21 @@
 "use strict";
-/*const name = "SeungYeol",
-      age = 25,
-      gender = "male";
-  */
 Object.defineProperty(exports, "__esModule", { value: true });
-const SayHi = (name, age, gender) => {
-    return `Hello ${name}, you are ${age}, you are a ${gender}`;
+/*interface Human{
+    name:string;
+    age:number;
+    gender:string;
+}
+*/
+class Human {
+    constructor(name, age, gender) {
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+    }
+}
+const lynn = new Human("Lynn", 18, "female");
+const SayHi = (person) => {
+    return `Hello ${person.name}, you are ${person.age}, you are a ${person.gender}`;
 };
-console.log(SayHi("SeungYeol", 25, "male"));
+console.log(SayHi(lynn));
 //# sourceMappingURL=index.js.map

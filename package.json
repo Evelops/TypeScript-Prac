@@ -4,5 +4,10 @@
   "description": "Study Tyscript by Making a blockchain",
   "main": "index.js",
   "repository": "https://github.com/eomseungyeol/TypeScript-Study.git",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts":{
+    "start":"node index.js",
+    "prestart":"tsc"
+
+  }
 }

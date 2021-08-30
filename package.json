@@ -1,0 +1,8 @@
+{
+  "name": "Typescript",
+  "version": " ",
+  "description": "Study Tyscript by Making a blockchain",
+  "main": "index.js",
+  "repository": "https://github.com/eomseungyeol/TypeScript-Study.git",
+  "license": "MIT"
+}

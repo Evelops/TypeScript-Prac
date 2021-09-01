@@ -8,8 +8,8 @@ class Block {
         data:string
         ) : string => CryptoJS.SHA256(index + previousHash + timestamp + data).toString();
 
-
-    static validateStructure = (aBlock:Block):boolean => 
+// 블록의 구조가 일치하는지 판단하는 함수.
+    static validateStructure = (aBlock:Block):boolean =>  
       typeof aBlock.index === "number" &&
       typeof aBlock.hash === "string" &&
       typeof aBlock.previousHash === "string" &&
@@ -68,32 +68,35 @@ const createNewBlock = (data:string) : Block => {
             return newBlock; // 새로운 block을 리턴해줌. 
 };
 
-const getHashforBlock = (aBlock : Block) :string => Block.calculateBlockHash(
+//Block의 해쉬를 가져오는 함수. 
+const getHashforBlock = (aBlock : Block) :string => Block.calculateBlockHash( 
     aBlock.index, 
     aBlock.previousHash, 
     aBlock.timestamp, 
     aBlock.data 
     );
    
+    //  Block들간의 link를 표현하고 제공되는 블럭이 유효한가를 평가하는 함수 .
 const isBlockValid = (
     candidateBlock:Block,
     previousBlock : Block
 ) : boolean => {
-    if(!Block.validateStructure(candidateBlock)){
+    if(!Block.validateStructure(candidateBlock)){  // Block 구조 판단. 
         return false;
     }
-    else if(previousBlock.index + 1 !== candidateBlock.index){
+    else if(previousBlock.index + 1 !== candidateBlock.index){ // Block index 판단. 
         return false;
     }
-    else if(previousBlock.hash !== candidateBlock.previousHash){
+    else if(previousBlock.hash !== candidateBlock.previousHash){ //Block 의 hash 판단. 
         return false;
-    }else if(getHashforBlock(candidateBlock) !== candidateBlock.hash){
+    }else if(getHashforBlock(candidateBlock) !== candidateBlock.hash){ // 현재 블럭의 해쉬값과 getHashforBlock에서 받아온 hash가 일치하는지 판다.ㄴ 
         return false;
     }else{
         return true;
     }
 }
 
+// 처음 block을 생성할 때 유효성 검사를 하고, 조건에 일치하면, blockchain에 push 하는 함수. 
 const addBlock = (candidateBlock: Block) : void  => {
     if(isBlockValid(candidateBlock, getLatestBlock())){
         blockchain.push(candidateBlock);
